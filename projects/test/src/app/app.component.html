@@ -1,2 +1,2 @@
 <h1>hello</h1>
-<ng-slider-plugin min="0" max="100" [formControl]="dates" margin="30"></ng-slider-plugin>
+<ng-slider-plugin [formatFn]="format.bind(this)" step="10" min="1598414400000" max="1598419800000" [formControl]="dates" margin="900000"></ng-slider-plugin>

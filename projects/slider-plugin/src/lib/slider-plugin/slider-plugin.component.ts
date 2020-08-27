@@ -38,6 +38,9 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   set Margin(val: string) {
     this.margin = parseInt(val);
   }
+
+  @Input()
+  formatFn: (value: number) => any;
   @ViewChild('sliderThumbLeft', { static: true }) sliderThumbLeft: ElementRef<HTMLLIElement>;
   @ViewChild('sliderThumbRight', { static: true }) sliderThumbRight: ElementRef<HTMLLIElement>;
   @ViewChild('sliderRange', { static: true }) sliderRange: ElementRef<HTMLLIElement>;
@@ -139,4 +142,10 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     // console.log('right', this.sliderThumbRightNative.getBoundingClientRect()['x']);
   }
 
+  formatValue(val) {
+    if (this.formatFn) {
+      return this.formatFn(val);
+    }
+    return val;
+  }
 }

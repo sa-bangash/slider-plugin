@@ -11,12 +11,12 @@
                 <div class="range" #sliderRange (click)="onRangeClick($event)"></div>
                 <div class="thumb left" #sliderThumbLeft>
                     <span class="thumb-label left" #thumbLeftLabel>
-                        <span class="label-data">{{this.leftThumbCtrl.value}}</span>
+                        <span class="label-data">{{formatValue(this.LeftValue)}}</span>
                     </span>
                 </div>
                 <div class="thumb right" #sliderThumbRight>
                     <span class="thumb-label right" #thumbRightLabel>
-                        <span class="label-data">{{this.rightThumbCtrl.value}}</span>
+                        <span class="label-data">{{formatValue(RightValue)}}</span>
                     </span>
                 </div>
             </div>
