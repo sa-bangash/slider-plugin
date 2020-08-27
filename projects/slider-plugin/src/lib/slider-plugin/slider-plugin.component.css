@@ -108,6 +108,18 @@ input[type=range]::-webkit-slider-thumb {
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 0%;
 }
+.pipe-container{
+	position: absolute;
+	display: flex;
+    justify-content: space-between;
+    background: red;
+    width: 100%;
+    top: 24px;
+}
+
+.pipe{
+	cursor: pointer;
+}
 
 /* #input-left{
 	top:-50px;

@@ -148,4 +148,24 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     }
     return val;
   }
+
+  totalStep() {
+    const value = [];
+    for (let i = this.min; i <= this.max; i = i + this.step) {
+      value.push(i);
+    }
+    return value;
+  }
+
+  jumpTo(val) {
+    const leftDiff = Math.abs(val - this.LeftValue);
+    const rightDiff = Math.abs(this.RightValue - val);
+    if (leftDiff < rightDiff) {
+      this.leftThumbCtrl.setValue(val);
+    } else {
+      this.rightThumbCtrl.setValue(val);
+    }
+    this.onLeftChange();
+    this.onRightChange();
+  }
 }
