@@ -15,18 +15,25 @@ import { merge } from 'rxjs';
   ],
 })
 export class SliderPluginComponent implements AfterViewInit, ControlValueAccessor {
-
-  @Input()
-  min: number;
-
-  @Input()
   max: number;
-
-  @Input()
+  min: number;
   step: number;
 
-  @ViewChild('inputLeft', { static: true }) inputLeft: ElementRef<HTMLInputElement>;
-  @ViewChild('inputRight', { static: true }) inputRight: ElementRef<HTMLInputElement>;
+  @Input('min')
+  set Min(val: string) {
+    this.min = parseInt(val);
+  }
+
+  @Input('max')
+  set Max(val: string) {
+    this.max = parseInt(val);
+  }
+
+  @Input('step')
+  set Step(val: string) {
+    this.step = parseInt(val);
+  }
+
   @ViewChild('sliderThumbLeft', { static: true }) sliderThumbLeft: ElementRef<HTMLLIElement>;
   @ViewChild('sliderThumbRight', { static: true }) sliderThumbRight: ElementRef<HTMLLIElement>;
   @ViewChild('sliderRange', { static: true }) sliderRange: ElementRef<HTMLLIElement>;
@@ -35,14 +42,6 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   rightThumbCtrl = new FormControl();
   onChange: any = () => { };
   onTouched: any = () => { };
-
-  get inputLeftNative(): HTMLInputElement {
-    return this.inputLeft.nativeElement;
-  }
-
-  get inputRightNative(): HTMLInputElement {
-    return this.inputRight.nativeElement;
-  }
 
   get sliderThumbLeftNative(): HTMLLIElement {
     return this.sliderThumbLeft.nativeElement;
@@ -70,53 +69,47 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
 
   setControlsValue(obj: any) {
     if (Array.isArray(obj)) {
-      console.log('setControl', obj)
-      this.leftThumbCtrl.setValue(obj[0]);
-      this.rightThumbCtrl.setValue(obj[1]);
       setTimeout(() => {
-        console.log('set tout')
+        console.log('setControl', typeof obj[1])
+        this.leftThumbCtrl.setValue(obj[0]);
+        this.rightThumbCtrl.setValue(obj[1]);
         this.onLeftChange();
         this.onRightChange();
-      }, 1000)
+      });
     }
   }
 
   emitControlsValue() {
-    console.log('emit', this.leftThumbCtrl.value, this.rightThumbCtrl.value)
+    console.log('emit', this.leftThumbCtrl.value, this.rightThumbCtrl.value);
     this.onChange([this.leftThumbCtrl.value, this.rightThumbCtrl.value]);
   }
   ngAfterViewInit(): void {
     console.log('after view init', this.step, this.min, this.max);
-    // this.onLeftChange();
-    // this.onRightChange();
-    // merge(this.rangeSecond.valueChanges, this.rangeFirst.valueChanges).subscribe((resp) => {
-    //   this.emitControlsValue();
-    // })
   }
 
   onLeftChange() {
-    console.log('left change', this.inputLeftNative.value, this.inputLeftNative.min, this.inputLeftNative.max)
-    const min = this.min;
-    const max = this.max;
-    const step = this.step;
-    this.inputLeftNative.value = Math.min(
-      parseInt(this.leftThumbCtrl.value),
-      parseInt(this.rightThumbCtrl.value) - step
-    ) + '';
-    const percent = ((parseInt(this.inputLeftNative.value) - min) / (max - min)) * 100;
+
+    this.leftThumbCtrl.setValue(
+      Math.min(
+        parseInt(this.leftThumbCtrl.value),
+        parseInt(this.rightThumbCtrl.value) - this.step
+      )
+    )
+    const percent = ((parseInt(this.leftThumbCtrl.value) - this.min) / (this.max - this.min)) * 100;
     this.sliderThumbLeftNative.style.left = percent + '%';
     this.sliderRangeNative.style.left = percent + '%';
     this.emitControlsValue();
   }
 
   onRightChange() {
-    const min = this.min;
-    const max = this.max;
-    const step = this.step;
-    this.inputRightNative.value = Math.max(
-      this.leftThumbCtrl.value + step,
-      parseInt(this.rightThumbCtrl.value)) + '';
-    const percent = ((parseInt(this.rightThumbCtrl.value) - min) / (max - min)) * 100;
+    this.rightThumbCtrl.setValue(
+      Math.max(
+        parseInt(this.leftThumbCtrl.value) + this.step, parseInt(this.rightThumbCtrl.value)
+      )
+    );
+    console.log(this.max, this.min, typeof this.min, typeof this.max)
+    const percent = ((parseInt(this.rightThumbCtrl.value) - this.min) / (this.max - this.min)) * 100;
+    console.log('percentage', percent, typeof percent)
     this.sliderThumbRightNative.style.right = (100 - percent) + '%';
     this.sliderRangeNative.style.right = (100 - percent) + '%';
     this.emitControlsValue();
