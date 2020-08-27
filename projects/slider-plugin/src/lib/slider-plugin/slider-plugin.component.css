@@ -64,17 +64,15 @@
 .slider > .thumb.active {
 	box-shadow: 0 0 0 40px rgba(98,0,238,.2);
 }
-#input-left{
-	top:-50px;
-}
+
 input[type=range] {
 	position: absolute;
 	pointer-events: none;
-	/* -webkit-appearance: none; */
+	-webkit-appearance: none;
 	z-index: 2;
 	height: 10px;
 	width: 100%;
-	/* opacity: 0; */
+	opacity: 0;
 }
 input[type=range]::-webkit-slider-thumb {
 	pointer-events: all;
@@ -83,7 +81,7 @@ input[type=range]::-webkit-slider-thumb {
 	border-radius: 0; 
 	border: 0 none;
 	background-color: red; 
-	/* -webkit-appearance: none; */
+	-webkit-appearance: none;
 }
 
 .thumb-label{
@@ -111,3 +109,6 @@ input[type=range]::-webkit-slider-thumb {
     border-bottom-right-radius: 0%;
 }
 
+/* #input-left{
+	top:-50px;
+} */

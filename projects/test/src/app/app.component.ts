@@ -8,5 +8,5 @@ import { FormControl } from '@angular/forms';
 })
 export class AppComponent {
   title = 'test';
-  dates = new FormControl([1598414400000, 1598419800000]);
+  dates = new FormControl([30, 90]);
 }

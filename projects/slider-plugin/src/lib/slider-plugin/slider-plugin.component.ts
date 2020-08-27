@@ -18,7 +18,7 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   max: number;
   min: number;
   step: number;
-
+  margin: number;
   @Input('min')
   set Min(val: string) {
     this.min = parseInt(val);
@@ -34,6 +34,10 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     this.step = parseInt(val);
   }
 
+  @Input('margin')
+  set Margin(val: string) {
+    this.margin = parseInt(val);
+  }
   @ViewChild('sliderThumbLeft', { static: true }) sliderThumbLeft: ElementRef<HTMLLIElement>;
   @ViewChild('sliderThumbRight', { static: true }) sliderThumbRight: ElementRef<HTMLLIElement>;
   @ViewChild('sliderRange', { static: true }) sliderRange: ElementRef<HTMLLIElement>;
@@ -54,8 +58,16 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   get sliderRangeNative(): HTMLLIElement {
     return this.sliderRange.nativeElement;
   }
+
+  get LeftValue(): number {
+    return parseInt(this.leftThumbCtrl.value);
+  }
+
+  get RightValue(): number {
+    return parseInt(this.rightThumbCtrl.value);
+  }
+
   writeValue(obj: any): void {
-    console.log('write', obj);
     this.setControlsValue(obj);
   }
 
@@ -70,7 +82,6 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   setControlsValue(obj: any) {
     if (Array.isArray(obj)) {
       setTimeout(() => {
-        console.log('setControl', typeof obj[1])
         this.leftThumbCtrl.setValue(obj[0]);
         this.rightThumbCtrl.setValue(obj[1]);
         this.onLeftChange();
@@ -80,21 +91,25 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   }
 
   emitControlsValue() {
-    console.log('emit', this.leftThumbCtrl.value, this.rightThumbCtrl.value);
     this.onChange([this.leftThumbCtrl.value, this.rightThumbCtrl.value]);
   }
   ngAfterViewInit(): void {
-    console.log('after view init', this.step, this.min, this.max);
   }
-
+  getDiff(): number {
+    return this.RightValue - this.LeftValue;
+  }
   onLeftChange() {
-
-    this.leftThumbCtrl.setValue(
-      Math.min(
-        parseInt(this.leftThumbCtrl.value),
-        parseInt(this.rightThumbCtrl.value) - this.step
+    if (this.getDiff() <= this.margin) {
+      this.leftThumbCtrl.setValue(this.RightValue - this.margin);
+    }
+    if (!this.margin) {
+      this.leftThumbCtrl.setValue(
+        Math.min(
+          parseInt(this.leftThumbCtrl.value),
+          parseInt(this.rightThumbCtrl.value)
+        )
       )
-    )
+    }
     const percent = ((parseInt(this.leftThumbCtrl.value) - this.min) / (this.max - this.min)) * 100;
     this.sliderThumbLeftNative.style.left = percent + '%';
     this.sliderRangeNative.style.left = percent + '%';
@@ -102,14 +117,17 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   }
 
   onRightChange() {
-    this.rightThumbCtrl.setValue(
-      Math.max(
-        parseInt(this.leftThumbCtrl.value) + this.step, parseInt(this.rightThumbCtrl.value)
-      )
-    );
-    console.log(this.max, this.min, typeof this.min, typeof this.max)
+    if (this.getDiff() <= this.margin) {
+      this.rightThumbCtrl.setValue(this.LeftValue + this.margin);
+    }
+    if (!this.margin) {
+      this.rightThumbCtrl.setValue(
+        Math.max(
+          parseInt(this.leftThumbCtrl.value), parseInt(this.rightThumbCtrl.value)
+        )
+      );
+    }
     const percent = ((parseInt(this.rightThumbCtrl.value) - this.min) / (this.max - this.min)) * 100;
-    console.log('percentage', percent, typeof percent)
     this.sliderThumbRightNative.style.right = (100 - percent) + '%';
     this.sliderRangeNative.style.right = (100 - percent) + '%';
     this.emitControlsValue();
