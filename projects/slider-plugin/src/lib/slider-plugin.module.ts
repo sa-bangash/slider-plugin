@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SliderPluginComponent } from './slider-plugin.component';
+import { SliderPluginComponent } from './slider-plugin/slider-plugin.component';
 
 
 
