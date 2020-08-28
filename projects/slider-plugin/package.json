@@ -1,8 +1,27 @@
 {
-  "name": "slider-plugin",
+  "name": "@ngx-bangash/slider-plugin",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14"
-  }
+    "@angular/core": "^8.2.14",
+    "@angular/forms": "~8.2.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sa-bangash/slider-plugin.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/sa-bangash/slider-plugin/blob/master/projects/slider-plugin/README.md",
+  "bugs": {
+    "url": "https://github.com/sa-bangash/slider-plugin/issues"
+  },
+  "description": "Range slider with two nodes.",
+  "keywords": [
+    "angular",
+    "plugin",
+    "slider plugin",
+    "angular slider",
+    "range slider"
+
+  ]
 }
