@@ -6,8 +6,8 @@
             [formControl]="rightThumbCtrl" (input)="onRightChange()">
 
         <div class="slider">
-            <div class="track"></div>
-            <div class="range" #sliderRange (click)="onRangeClick($event)"></div>
+            <div class="track" (click)="onRangeClick($event)" #track></div>
+            <div class="range" #sliderRange (click)="onRangeClick($event, track)"></div>
             <div class="pipe-container">
                 <span *ngFor="let item of totalStep()" class="pipe" (click)="jumpTo(item)">
                     {{formatValue(item)}}

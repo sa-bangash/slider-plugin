@@ -70,6 +70,21 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     return parseInt(this.rightThumbCtrl.value);
   }
 
+  getLeftDiff(val: number): number {
+    return Math.abs(val - this.LeftValue);
+  }
+
+  getRightDiff(val: number): number {
+    return Math.abs(this.RightValue - val);
+  }
+
+  setNearsetValue(val: number) {
+    if (this.getLeftDiff(val) < this.getRightDiff(val)) {
+      this.leftThumbCtrl.setValue(val);
+    } else {
+      this.rightThumbCtrl.setValue(val);
+    }
+  }
   writeValue(obj: any): void {
     this.setControlsValue(obj);
   }
@@ -136,10 +151,14 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     this.emitControlsValue();
   }
 
-  onRangeClick(event) {
-    console.log('event', event.x);
-    // console.log('left', this.sliderThumbLeftNative.getBoundingClientRect()['x']);
-    // console.log('right', this.sliderThumbRightNative.getBoundingClientRect()['x']);
+  onRangeClick(event: MouseEvent, track?: HTMLElement) {
+    const { clientX } = event;
+    const target = track || event.target;
+    const { left, width } = (target as HTMLElement).getBoundingClientRect();
+    const pre = Math.floor(((clientX - left) / width) * 100);
+    const val = ((pre / 100) * (this.max - this.min)) + this.min;
+    this.setNearsetValue(val);
+    this.onRender();
   }
 
   formatValue(val) {
@@ -156,16 +175,12 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     }
     return value;
   }
-
-  jumpTo(val) {
-    const leftDiff = Math.abs(val - this.LeftValue);
-    const rightDiff = Math.abs(this.RightValue - val);
-    if (leftDiff < rightDiff) {
-      this.leftThumbCtrl.setValue(val);
-    } else {
-      this.rightThumbCtrl.setValue(val);
-    }
+  onRender() {
     this.onLeftChange();
     this.onRightChange();
+  }
+  jumpTo(val: number) {
+    this.setNearsetValue(val);
+    this.onRender();
   }
 }
