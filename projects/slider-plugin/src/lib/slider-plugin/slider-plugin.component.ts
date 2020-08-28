@@ -3,7 +3,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input, forward
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge } from 'rxjs';
 @Component({
-  selector: 'ng-slider-plugin',
+  selector: 'ngx-slider-plugin',
   templateUrl: './slider-plugin.component.html',
   styleUrls: ['./slider-plugin.component.css'],
   providers: [
