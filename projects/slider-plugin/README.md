@@ -12,13 +12,13 @@
 Run the following code in your terminal:
 
 ```
-yarn add ngx-slider-plugin
+yarn add @ngx-slider-plugin
 ```
 
 or if you are using npm:
 
 ```
-npm install ngx-slider-plugin
+npm install @ngx-slider-plugin
 ```
 
 ## Usage
@@ -39,8 +39,8 @@ export class AppModule {}
 ```
 
 ```html
-<ng-slider-plugin [formatFn]="format.bind(this)" [step]="step" [min]="min" [max]="max" [formControl]="dates"
-        [margin]="margin"></ng-slider-plugin>
+<ngx-slider-plugin [formatFn]="format.bind(this)" [step]="step" [min]="min" [max]="max" [formControl]="dates"
+        [margin]="margin"></ngx-slider-plugin>
 ```
 
 ### License and copy right

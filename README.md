@@ -39,8 +39,8 @@ export class AppModule {}
 ```
 
 ```html
-<ng-slider-plugin [formatFn]="format.bind(this)" [step]="step" [min]="min" [max]="max" [formControl]="dates"
-        [margin]="margin"></ng-slider-plugin>
+<ngx-slider-plugin [formatFn]="format.bind(this)" [step]="step" [min]="min" [max]="max" [formControl]="dates"
+        [margin]="margin"></ngx-slider-plugin>
 ```
 
 ### License and copy right
