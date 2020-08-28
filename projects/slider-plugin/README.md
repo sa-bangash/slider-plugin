@@ -1,24 +1,49 @@
-# SliderPlugin
+# Slider Plugin
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
 
-## Code scaffolding
+<p align="center">
+  <a href="https://twitter.com/__bangash"><img src="https://img.shields.io/twitter/follow/__bangash.svg?label=Follow"/></a>
+</p>
 
-Run `ng generate component component-name --project slider-plugin` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project slider-plugin`.
-> Note: Don't forget to add `--project slider-plugin` or else it will be added to the default project in your `angular.json` file. 
 
-## Build
 
-Run `ng build slider-plugin` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Publishing
+Run the following code in your terminal:
 
-After building your library with `ng build slider-plugin`, go to the dist folder `cd dist/slider-plugin` and run `npm publish`.
+```
+yarn add ngx-slider-plugin
+```
 
-## Running unit tests
+or if you are using npm:
 
-Run `ng test slider-plugin` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+npm install ngx-slider-plugin
+```
 
-## Further help
+## Usage
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Setup Before Initial Use
+
+Import `ngx-slider-plugin` into your root module like:
+
+```TS
+import { SliderPluginModule } from 'ngx-slider-plugin';
+
+@NgModule({
+  imports: [
+    SliderPluginModule,
+  ]
+})
+export class AppModule {}
+```
+
+```html
+<ng-slider-plugin [formatFn]="format.bind(this)" [step]="step" [min]="min" [max]="max" [formControl]="dates"
+        [margin]="margin"></ng-slider-plugin>
+```
+
+### License and copy right
+&copy; Shahid Ahmad
+
+License under the [MIT License](LICENSE).
