@@ -15,13 +15,12 @@
   "bugs": {
     "url": "https://github.com/sa-bangash/slider-plugin/issues"
   },
-  "description": "Range slider with two nodes.",
+  "description": "Light weight slider.",
   "keywords": [
     "angular",
     "plugin",
     "slider plugin",
     "angular slider",
     "range slider"
-
   ]
 }
