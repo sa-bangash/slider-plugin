@@ -39,8 +39,13 @@ export class AppModule {}
 ```
 
 ```html
-<ngx-slider-plugin [formatFn]="format.bind(this)" [step]="step" [min]="min" [max]="max" [formControl]="dates"
-        [margin]="margin"></ngx-slider-plugin>
+  <ngx-slider-plugin [pipeFormatFn]="format" [labelFormatFn]="format"  [step]="step" [min]="min" [max]="max" [formControl]="dates" [margin]="margin"></ngx-slider-plugin>
+```
+
+```TS
+  format(val){
+    return val+'h';
+  }
 ```
 
 ### License and copy right
