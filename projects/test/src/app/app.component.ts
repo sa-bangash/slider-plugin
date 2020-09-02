@@ -23,7 +23,7 @@ export class AppComponent {
     //   this.dates.setValue([1598518800000, 1598522400000]);
     // }, 4000);
   }
-  format(val) {
+  format(val, idx, length) {
     const mints = this.pipe.transform(val, 'mm');
     if (mints === '00') {
       return this.pipe.transform(val, 'HHmm');

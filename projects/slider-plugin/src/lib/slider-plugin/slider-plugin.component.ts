@@ -51,7 +51,7 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   }
 
   @Input()
-  pipeFormatFn: (value: number) => string;
+  pipeFormatFn: (value: number, idx: number, length: number) => string;
 
   @Input()
   labelFormatFn: (value: number) => string;
@@ -184,9 +184,9 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     this.onRender();
   }
 
-  pipeFormat(val) {
+  pipeFormat(val, idx, data: any[] = []) {
     if (this.pipeFormatFn) {
-      return this.pipeFormatFn(val);
+      return this.pipeFormatFn(val, idx, data.length);
     }
     return val;
   }
@@ -216,5 +216,9 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
       return this.labelFormatFn(val);
     }
     return val;
+  }
+
+  trackByFn(i: number) {
+    return i;
   }
 }
