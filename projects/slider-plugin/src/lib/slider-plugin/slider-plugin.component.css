@@ -125,7 +125,8 @@ input[type=range]::-webkit-slider-thumb {
     width: 110%;
 	top: 24px;
 	color:#999;
-	left: -17px;
+	left: -14px;
+	font-size: 10px;
 }
 
 .pipe{

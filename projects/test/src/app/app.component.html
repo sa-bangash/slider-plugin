@@ -1,5 +1,5 @@
 
 <div class="slider-wrapper">
-    <ngx-slider-plugin [formatFn]="format.bind(this)" [step]="step" [min]="min" [max]="max" [formControl]="dates"
+    <ngx-slider-plugin [pipeFormatFn]="format.bind(this)" [labelFormatFn]="formatLabel.bind(this)"  [step]="step" [min]="min" [max]="max" [formControl]="dates"
         [margin]="margin"></ngx-slider-plugin>
 </div>

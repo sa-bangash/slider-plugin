@@ -18,14 +18,14 @@
       "es2018",
       "dom"
     ],
-    // "paths": {
-    //   "slider-plugin": [
-    //     "dist/slider-plugin"
-    //   ],
-    //   "slider-plugin/*": [
-    //     "dist/slider-plugin/*"
-    //   ]
-    // }
+    "paths": {
+      "slider-plugin": [
+        "dist/slider-plugin"
+      ],
+      "slider-plugin/*": [
+        "dist/slider-plugin/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

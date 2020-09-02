@@ -1,11 +1,22 @@
 // tslint:disable: radix
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input, forwardRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  Input,
+  forwardRef,
+  ChangeDetectionStrategy,
+  ViewEncapsulation
+} from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge } from 'rxjs';
 @Component({
   selector: 'ngx-slider-plugin',
   templateUrl: './slider-plugin.component.html',
   styleUrls: ['./slider-plugin.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -19,7 +30,6 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   min: number;
   step: number;
   margin: number;
-
   @Input('min')
   set Min(val: string) {
     this.min = parseInt(val);
@@ -41,7 +51,10 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   }
 
   @Input()
-  formatFn: (value: number) => any;
+  pipeFormatFn: (value: number) => string;
+
+  @Input()
+  labelFormatFn: (value: number) => string;
   @ViewChild('sliderThumbLeft', { static: true }) sliderThumbLeft: ElementRef<HTMLLIElement>;
   @ViewChild('sliderThumbRight', { static: true }) sliderThumbRight: ElementRef<HTMLLIElement>;
   @ViewChild('sliderRange', { static: true }) sliderRange: ElementRef<HTMLLIElement>;
@@ -159,6 +172,9 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   }
 
   onRangeClick(event: MouseEvent, track?: HTMLElement) {
+    if (this.step) {
+      return;
+    }
     const { clientX } = event;
     const target = track || event.target;
     const { left, width } = (target as HTMLElement).getBoundingClientRect();
@@ -168,19 +184,21 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     this.onRender();
   }
 
-  formatValue(val) {
-    if (this.formatFn) {
-      return this.formatFn(val);
+  pipeFormat(val) {
+    if (this.pipeFormatFn) {
+      return this.pipeFormatFn(val);
     }
     return val;
   }
 
-  totalStep() {
-    const value = [];
-    for (let i = this.min; i <= this.max; i = i + this.step) {
-      value.push(i);
+
+  generatePipesLabel() {
+    const values = [];
+    const step = this.step || (this.max - this.min) / 4;
+    for (let i = this.min; i <= this.max; i = i + step) {
+      values.push(i);
     }
-    return value;
+    return values;
   }
 
   onRender() {
@@ -191,5 +209,12 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   jumpTo(val: number) {
     this.setNearsetValue(val);
     this.onRender();
+  }
+
+  labelFormat(val) {
+    if (this.labelFormatFn) {
+      return this.labelFormatFn(val);
+    }
+    return val;
   }
 }

@@ -12,10 +12,10 @@ import { DatePipe } from '@angular/common';
 })
 export class AppComponent {
   step = 900000;
-  min = 1598414400000;
-  max = 1598419800000;
-  margin = 900000;
-  dates = new FormControl([1598414400000, 1598419800000]);
+  min = 1599033600000;
+  max = 1599044400000;
+  margin = 1800000;
+  dates = new FormControl([1599033600000, 1599044400000]);
   constructor(private pipe: DatePipe) {
     // setTimeout(() => {
     //   this.min = 1598518800000;
@@ -24,6 +24,14 @@ export class AppComponent {
     // }, 4000);
   }
   format(val) {
+    const mints = this.pipe.transform(val, 'mm');
+    if (mints === '00') {
+      return this.pipe.transform(val, 'HHmm');
+    }
+    return mints;
+  }
+
+  formatLabel(val) {
     return this.pipe.transform(val, 'HHmm');
   }
 }

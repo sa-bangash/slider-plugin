@@ -9,18 +9,18 @@
             <div class="track" (click)="onRangeClick($event)" #track></div>
             <div class="range" #sliderRange (click)="onRangeClick($event, track)"></div>
             <div class="pipe-container">
-                <span *ngFor="let item of totalStep()" class="pipe" (click)="jumpTo(item)">
-                    {{formatValue(item)}}
+                <span *ngFor="let item of generatePipesLabel(); let i=index;" class="pipe" (click)="jumpTo(item)">
+                    {{pipeFormat(item)}}
                 </span>
             </div>
             <div class="thumb left" #sliderThumbLeft>
                 <span class="thumb-label left" #thumbLeftLabel>
-                    <span class="label-data">{{formatValue(this.LeftValue)}}</span>
+                    <span class="label-data">{{labelFormat(this.LeftValue)}}</span>
                 </span>
             </div>
             <div class="thumb right" #sliderThumbRight>
                 <span class="thumb-label right" #thumbRightLabel>
-                    <span class="label-data">{{formatValue(RightValue)}}</span>
+                    <span class="label-data">{{labelFormat(RightValue)}}</span>
                 </span>
             </div>
         </div>
