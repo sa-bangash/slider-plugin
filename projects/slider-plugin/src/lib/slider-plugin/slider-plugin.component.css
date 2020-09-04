@@ -51,11 +51,11 @@
 
 .slider > .thumb.left {
 	left: 25%;
-	transform: translate(-1px, -7px);
+	transform: translate(-1px, -10px);
 }
 .slider > .thumb.right {
 	right: 25%;
-	transform: translate(4px, -7px);
+	transform: translate(4px, -10px);
 }
 .slider > .thumb.hover {
 	box-shadow: 0 0 0 20px rgba(98,0,238,.1);
