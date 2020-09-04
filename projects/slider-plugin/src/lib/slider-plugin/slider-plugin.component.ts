@@ -7,7 +7,8 @@ import {
   Input,
   forwardRef,
   ChangeDetectionStrategy,
-  ViewEncapsulation
+  ViewEncapsulation,
+  HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge } from 'rxjs';
@@ -30,6 +31,8 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   min: number;
   step: number;
   margin: number;
+  @HostBinding('class') class = 'host-slider';
+
   @Input('min')
   set Min(val: string) {
     this.min = parseInt(val);
@@ -149,8 +152,8 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
       );
     }
     const percent = ((parseInt(this.leftThumbCtrl.value) - this.min) / (this.max - this.min)) * 100;
-    this.sliderThumbLeftNative.style.left = percent + '%';
-    this.sliderRangeNative.style.left = percent + '%';
+    this.sliderThumbLeftNative.style.left = Math.floor(percent) + '%';
+    this.sliderRangeNative.style.left = Math.floor(percent) + '%';
     this.emitControlsValue();
   }
 
@@ -166,8 +169,8 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
       );
     }
     const percent = ((parseInt(this.rightThumbCtrl.value) - this.min) / (this.max - this.min)) * 100;
-    this.sliderThumbRightNative.style.right = (100 - percent) + '%';
-    this.sliderRangeNative.style.right = (100 - percent) + '%';
+    this.sliderThumbRightNative.style.right = Math.floor(100 - percent) + '%';
+    this.sliderRangeNative.style.right = Math.floor(100 - percent) + '%';
     this.emitControlsValue();
   }
 

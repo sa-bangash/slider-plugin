@@ -1,16 +1,20 @@
+.host-slider {
+ width: 100%;
+}
+
 .middle {
 	position: relative;
 	width: 100%;
-	min-width: 300px;
+	min-width: 100%;
 }
 
 .slider {
 	position: relative;
 	z-index: 1;
 	height: 10px;
-	margin: 0 15px;
 	border:1px solid #D3D3D3;
 	border-radius: 4px;
+	height: 6px;
 }
 .slider > .track {
 	position: absolute;
@@ -20,7 +24,7 @@
 	top: 0;
 	bottom: 0;
 	border-radius: 5px;
-	background-color: #FAFAFA;
+	background-color: #ebebeb;
 }
 .slider > .range {
 	position: absolute;
@@ -30,51 +34,28 @@
 	top: 0;
 	bottom: 0;
 	border-radius: 5px;
-	background-color: #ebebeb;
+	background-color: #999;
 }
+
 .slider > .thumb {
-	border: 1px solid #D9D9D9;
-    border-radius: 3px;
-    background: #FFF;
-    cursor: default;
-	box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #EBEBEB, 0 3px 6px -3px #BBB;
-	
+    border-radius: 4px;
+	background: #4a8aa2;
+	cursor: pointer;
 	position: absolute;
 	z-index: 3;
-	width: 30px;
-	height: 30px;
+	width: 12px;
+	height: 22px;
 	transition: box-shadow .3s ease-in-out;
 
-}
-.slider > .thumb::after{
-	content: "";
-    display: block;
-    position: absolute;
-    height: 14px;
-    width: 1px;
-    background: #E8E7E6;
-    left: 16px;
-	top: 6px;
-}
-.slider > .thumb::before{
-	content: "";
-    display: block;
-    position: absolute;
-    height: 14px;
-    width: 1px;
-    background: #E8E7E6;
-    left: 13px;
-	top: 6px;
-	z-index: 4;
 }
 
 .slider > .thumb.left {
 	left: 25%;
-	transform: translate(-15px, -10px);
+	transform: translate(-1px, -7px);
 }
 .slider > .thumb.right {
 	right: 25%;
-	transform: translate(15px, -10px);
+	transform: translate(4px, -7px);
 }
 .slider > .thumb.hover {
 	box-shadow: 0 0 0 20px rgba(98,0,238,.1);
@@ -94,8 +75,8 @@ input[type=range] {
 }
 input[type=range]::-webkit-slider-thumb {
 	pointer-events: all;
-	width: 30px;
-	height: 30px;
+	width: 12px;
+	height: 22px;
 	border-radius: 0; 
 	border: 0 none;
 	background-color: red; 
@@ -103,7 +84,6 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .thumb-label{
-
 	display: block;
     position: absolute;
     border: 1px solid #D9D9D9;
@@ -118,14 +98,15 @@ input[type=range]::-webkit-slider-thumb {
     left: 50%;
     bottom: 120%;
 }
+
 .pipe-container{
 	position: absolute;
 	display: flex;
     justify-content: space-between;
-    width: 110%;
+    width: 100%;
 	top: 24px;
 	color:#999;
-	left: -14px;
+	left: 0px;
 	font-size: 10px;
 }
 
@@ -134,4 +115,8 @@ input[type=range]::-webkit-slider-thumb {
 }
 /* #input-left{
 	top:50px;
+}
+
+#input-right{
+	top:-50px;
 } */
