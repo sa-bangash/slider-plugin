@@ -11,7 +11,6 @@ import {
   HostBinding
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { merge } from 'rxjs';
 @Component({
   selector: 'ngx-slider-plugin',
   templateUrl: './slider-plugin.component.html',
@@ -58,6 +57,15 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
 
   @Input()
   labelFormatFn: (value: number) => string;
+
+  @Input()
+  set pipeDensity(val) {
+    this._density = parseInt(val);
+  }
+  get pipeDensity() {
+    return this._density;
+  }
+  private _density: any;
   @ViewChild('sliderThumbLeft', { static: true }) sliderThumbLeft: ElementRef<HTMLLIElement>;
   @ViewChild('sliderThumbRight', { static: true }) sliderThumbRight: ElementRef<HTMLLIElement>;
   @ViewChild('sliderRange', { static: true }) sliderRange: ElementRef<HTMLLIElement>;
@@ -194,24 +202,36 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     return val;
   }
 
-
+  getPipeLabelStyle(value) {
+    const percent = ((parseInt(value) - this.min) / (this.max - this.min)) * 100;
+    return {
+      left: Math.floor(percent) + '%',
+      transform: 'translateX(-40%)'
+    };
+  }
   generatePipesLabel() {
     const values = [];
-    let cal = this.step || (this.max - this.min) / 6;
-    const step = (this.max - this.min) / this.step;
-    if (step > 52) {
-      cal = this.step * 5;
-    } else if (step > 39) {
-      cal = this.step * 4;
-    } else if (step > 26) {
-      cal = this.step * 3;
-    } else if (step > 13) {
-      cal = this.step * 2;
+    const half = this.step / 2;
+    const density = this.pipeDensity === 1 ? this.pipeDensity + 1 : this.pipeDensity;
+    const cal = (this.max - this.min) / (density + 1);
+    for (let i = this.min + cal; i < this.max; i = i + cal) {
+      let val;
+      const reminder = i % this.step;
+      if (reminder < half) {
+        val = i - reminder;
+        if (val < this.min) {
+          val = this.min;
+        }
+      } else {
+        val = (i - reminder) + this.step;
+        if (val > this.max) {
+          val = this.max;
+        }
+      }
+      values.push(Math.floor(val));
     }
-    console.log(step);
-    for (let i = this.min; i <= this.max; i = i + cal) {
-      values.push(i);
-    }
+    values.push(this.min);
+    values.push(this.max);
     return values;
   }
 
