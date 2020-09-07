@@ -12,16 +12,16 @@ import { DatePipe } from '@angular/common';
 })
 export class AppComponent {
   step = 900000;
-  min = 1599033600000;
-  max = 1599044400000;
+  min = 1599451200000;
+  max = 1599483600000;
   margin = 1800000;
-  dates = new FormControl([1599033600000, 1599044400000]);
+  dates = new FormControl([1599451200000, 1599483600000]);
   constructor(private pipe: DatePipe) {
-    // setTimeout(() => {
-    //   this.min = 1598518800000;
-    //   this.max = 1598522400000;
-    //   this.dates.setValue([1598518800000, 1598522400000]);
-    // }, 4000);
+    setTimeout(() => {
+      this.min = 1599451200000;
+      this.max = 1599501600000;
+      this.dates.setValue([1599451200000, 1599501600000]);
+    }, 4000);
   }
   format(val, idx, length) {
     const mints = this.pipe.transform(val, 'mm');

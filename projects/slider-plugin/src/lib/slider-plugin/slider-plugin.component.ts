@@ -197,8 +197,19 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
 
   generatePipesLabel() {
     const values = [];
-    const step = this.step || (this.max - this.min) / 4;
-    for (let i = this.min; i <= this.max; i = i + step) {
+    let cal = this.step || (this.max - this.min) / 6;
+    const step = (this.max - this.min) / this.step;
+    if (step > 52) {
+      cal = this.step * 5;
+    } else if (step > 39) {
+      cal = this.step * 4;
+    } else if (step > 26) {
+      cal = this.step * 3;
+    } else if (step > 13) {
+      cal = this.step * 2;
+    }
+    console.log(step);
+    for (let i = this.min; i <= this.max; i = i + cal) {
       values.push(i);
     }
     return values;
