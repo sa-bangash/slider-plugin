@@ -39,7 +39,7 @@ export class AppModule {}
 ```
 
 ```html
-  <ngx-slider-plugin [pipeFormatFn]="format" [labelFormatFn]="format"  [step]="step" [min]="min" [max]="max" [formControl]="dates" [margin]="margin"></ngx-slider-plugin>
+    <ngx-slider-plugin [pipeFormatFn]="format" pipeDensity="11" [labelFormatFn]="format"  [step]="step" [min]="min" [max]="max" [formControl]="dates" [margin]="margin"></ngx-slider-plugin>
 ```
 
 ```TS
