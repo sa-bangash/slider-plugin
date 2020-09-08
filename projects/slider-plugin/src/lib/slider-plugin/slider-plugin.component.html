@@ -8,7 +8,7 @@
             <div class="track" (click)="onRangeClick($event)" #track></div>
             <div class="range" #sliderRange (click)="onRangeClick($event, track)"></div>
             <div class="pipe-container">
-                <span [ngStyle]="getPipeLabelStyle(item)"
+                <span [ngStyle]="getPipeLabelStyle(item)" [title]="pipeFormat(item,i,data)"
                     *ngFor="let item of generatePipesLabel() as data; let i=index; trackBy:trackByFn" class="pipe"
                     (click)="jumpTo(item)">
                     {{pipeFormat(item, i ,data)}}
