@@ -12,10 +12,10 @@ import { DatePipe } from '@angular/common';
 })
 export class AppComponent {
   step = 900000;
-  min = 1599451200000;
-  max = 1599454800000;
+  max = 1599451200000;
+  min = 1599454800000;
   margin = 1800000;
-  dates = new FormControl([1599451200000, 1599454800000]);
+  dates = new FormControl([this.min, this.max]);
   constructor(private pipe: DatePipe) {
     setTimeout(() => {
       this.min = 1599451200000;

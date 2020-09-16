@@ -146,8 +146,22 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   getDiff(): number {
     return this.RightValue - this.LeftValue;
   }
+  makeRightThumbLeft() {
+    this.rightThumbCtrl.setValue(this.min);
+    this.sliderThumbRightNative.style.left = '0%';
+    this.sliderRangeNative.style.width = '0px';
+  }
+
+  makelefthumbLeft() {
+    this.leftThumbCtrl.setValue(this.min);
+    this.sliderThumbLeftNative.style.left = '0%';
+    this.sliderRangeNative.style.width = '0px';
+  }
 
   onLeftChange() {
+    if (this.min > this.max) {
+      return this.makelefthumbLeft();
+    }
     if (this.getDiff() <= this.margin) {
       this.leftThumbCtrl.setValue(this.RightValue - this.margin);
     }
@@ -166,6 +180,9 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
   }
 
   onRightChange() {
+    if (this.min > this.max) {
+      return this.makeRightThumbLeft();
+    }
     if (this.getDiff() <= this.margin) {
       this.rightThumbCtrl.setValue(this.LeftValue + this.margin);
     }
@@ -177,6 +194,7 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
       );
     }
     const percent = ((parseInt(this.rightThumbCtrl.value) - this.min) / (this.max - this.min)) * 100;
+    this.sliderThumbRightNative.style.left = null;
     this.sliderThumbRightNative.style.right = Math.floor(100 - percent) + '%';
     this.sliderRangeNative.style.right = Math.floor(100 - percent) + '%';
     this.emitControlsValue();
