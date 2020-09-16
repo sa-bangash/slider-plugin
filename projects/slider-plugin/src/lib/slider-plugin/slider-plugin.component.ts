@@ -107,7 +107,10 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     if (this.getLeftDiff(val) < this.getRightDiff(val)) {
       this.leftThumbCtrl.setValue(val);
     } else {
-      this.rightThumbCtrl.setValue(val);
+      const isSet = (this.LeftValue + this.margin <= val);
+      if (isSet) {
+        this.rightThumbCtrl.setValue(val);
+      }
     }
   }
 
@@ -253,7 +256,6 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
           val = this.min;
         }
       } else {
-        // console.log('else part');
         val = (i - reminder) + this.step;
         if (val > this.max) {
           val = this.max;
