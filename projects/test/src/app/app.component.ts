@@ -12,8 +12,8 @@ import { DatePipe } from '@angular/common';
 })
 export class AppComponent {
   step = 900000;
-  max = 1599451200000;
-  min = 1599454800000;
+  max = 1600244760000;
+  min = 1600239360000;
   margin = 1800000;
   dates = new FormControl([this.min, this.max]);
   constructor(private pipe: DatePipe) {
@@ -26,9 +26,9 @@ export class AppComponent {
   format(val, idx, length) {
     // return val;
     const mints = this.pipe.transform(val, 'mm');
-    if (mints === '00') {
-      return this.pipe.transform(val, 'HHmm');
-    }
+    // if (mints === '00') {
+    //   return this.pipe.transform(val, 'HHmm');
+    // }
     return mints;
   }
 

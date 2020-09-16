@@ -232,6 +232,18 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     const half = this.step / 2;
     const density = this.pipeDensity === 1 ? this.pipeDensity + 1 : this.pipeDensity;
     const cal = (this.max - this.min) / (density + 1);
+    const countStep = (this.max - this.min) / this.step;
+    if (countStep < 12) {
+      for (let i = this.min; i <= this.max; i = i + this.step) {
+        if (i > this.max) {
+          values.push(this.max);
+        } else {
+          values.push(i);
+        }
+      }
+      return values;
+    }
+
     for (let i = this.min + cal; i < this.max; i = i + cal) {
       let val;
       const reminder = i % this.step;
@@ -241,6 +253,7 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
           val = this.min;
         }
       } else {
+        // console.log('else part');
         val = (i - reminder) + this.step;
         if (val > this.max) {
           val = this.max;
