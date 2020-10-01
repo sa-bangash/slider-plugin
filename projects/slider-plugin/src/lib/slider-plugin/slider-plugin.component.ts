@@ -66,6 +66,15 @@ export class SliderPluginComponent implements AfterViewInit, ControlValueAccesso
     return this._density;
   }
   private _density: any;
+  @Input()
+  set pipe(val) {
+    this._pipe = val != null && `${val}` !== 'false';
+  }
+
+  get pipe(): boolean {
+    return this._pipe;
+  }
+  private _pipe = false;
   @ViewChild('sliderThumbLeft', { static: true }) sliderThumbLeft: ElementRef<HTMLLIElement>;
   @ViewChild('sliderThumbRight', { static: true }) sliderThumbRight: ElementRef<HTMLLIElement>;
   @ViewChild('sliderRange', { static: true }) sliderRange: ElementRef<HTMLLIElement>;

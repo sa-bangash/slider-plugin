@@ -7,10 +7,10 @@
         <div class="slider">
             <div class="track" (click)="onRangeClick($event)" #track></div>
             <div class="range" #sliderRange (click)="onRangeClick($event, track)"></div>
-            <div class="pipe-container">
+            <div class="pipe-container" *ngIf="pipe">
                 <span [ngStyle]="getPipeLabelStyle(item)" [title]="pipeFormat(item,i,data)"
-                    *ngFor="let item of generatePipesLabel() as data; let i=index; trackBy:trackByFn" class="pipe"
-                    (click)="jumpTo(item)">
+                    *ngFor="let item of generatePipesLabel() as data; let i=index; trackBy:trackByFn; let e=even"
+                    class="pipe" (click)="jumpTo(item)" [class.even]="e" [class.odd]="!e">
                     {{pipeFormat(item, i ,data)}}
                 </span>
             </div>

@@ -18,10 +18,10 @@ export class AppComponent {
   dates = new FormControl([this.min, this.max]);
   constructor(private pipe: DatePipe) {
     setTimeout(() => {
-      this.min = 1599451200000;
-      this.max = 1599462000000;
-      this.dates.setValue([1599451200000, 1599462000000]);
-    }, 4000);
+      this.min = 1601521200000;
+      this.max = 1601557200000;
+      this.dates.setValue([1601521200000, 1601557200000]);
+    }, 3000);
   }
   format(val, idx, length) {
     // return val;
